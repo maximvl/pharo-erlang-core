@@ -38,18 +38,11 @@ ErlangPid >> = another [
 		[self tag = (another tag)]]]]].
 ]
 
-{ #category : #'*Erlang-Core' }
-ErlangPid >> asErlangObject: aStream [
-	"comment stating purpose of message"
-
-	ErlangDencoder writePid: self to: aStream.
-]
-
 { #category : #converting }
 ErlangPid >> asString [
 	"comment stating purpose of message"
 
-	^ '#Pid<', node, '.', id, '.', serial, '>' 
+	^ '#Pid<', node, '.', (id asString), '.', (serial asString), '>' 
 ]
 
 { #category : #accessing }
@@ -64,6 +57,12 @@ ErlangPid >> creation: aCreation [
 	"comment stating purpose of message"
 
 	creation := aCreation.
+]
+
+{ #category : #'*Erlang-Core' }
+ErlangPid >> erlangEncoder [
+
+	^ #ErlangPidEncoder .
 ]
 
 { #category : #comparing }

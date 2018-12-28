@@ -35,13 +35,6 @@ ErlangRef >> = another [
 		[self tag = (another tag)]]]].
 ]
 
-{ #category : #'*Erlang-Core' }
-ErlangRef >> asErlangObject: aStream [
-	"comment stating purpose of message"
-
-	ErlangDencoder writeRef: self to: aStream.
-]
-
 { #category : #converting }
 ErlangRef >> asString [
 	"comment stating purpose of message"
@@ -60,6 +53,13 @@ ErlangRef >> creation: arg [
 	"comment stating purpose of message"
 
 	creation := arg.
+]
+
+{ #category : #'*Erlang-Core' }
+ErlangRef >> erlangEncoder [
+	"comment stating purpose of message"
+
+	^ #ErlangRefEncoder.
 ]
 
 { #category : #comparing }

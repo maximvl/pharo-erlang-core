@@ -1,8 +1,7 @@
 Extension { #name : #ErlangPid }
 
 { #category : #'*Erlang-Core' }
-ErlangPid >> asErlangObject: aStream [
-	"comment stating purpose of message"
+ErlangPid >> erlangEncoder [
 
-	ErlangDencoder writePid: self to: aStream.
+	^ #ErlangPidEncoder .
 ]

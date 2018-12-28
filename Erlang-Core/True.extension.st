@@ -1,8 +1,8 @@
 Extension { #name : #True }
 
 { #category : #'*Erlang-Core' }
-True >> asErlangObject: aStream [
+True >> asErlangTerm [
 	"comment stating purpose of message"
 
-	ErlangDencoder writeAtom: #true to: aStream .
+	^ #true
 ]

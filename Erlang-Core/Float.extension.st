@@ -1,8 +1,8 @@
 Extension { #name : #Float }
 
 { #category : #'*Erlang-Core' }
-Float >> asErlangObject: aStream [
+Float >> erlangEncoder [
 	"comment stating purpose of message"
 
-	^ 'float'.
+	^ #ErlangFloatEncoder
 ]

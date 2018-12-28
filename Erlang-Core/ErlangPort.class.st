@@ -35,18 +35,11 @@ ErlangPort >> = another [
 		[self tag = (another tag)]]]].
 ]
 
-{ #category : #'*Erlang-Core' }
-ErlangPort >> asErlangObject: aStream [
-	"comment stating purpose of message"
-
-	ErlangDencoder writePort: self to: aStream.
-]
-
-{ #category : #convertion }
+{ #category : #converting }
 ErlangPort >> asString [
 	"comment stating purpose of message"
 
-	^ '#Port<', node, '.', id, '>'
+	^ '#Port<', node, '.', (id asString), '>'
 ]
 
 { #category : #accessing }
@@ -61,6 +54,13 @@ ErlangPort >> creation: aCreation [
 	"comment stating purpose of message"
 
 	creation := aCreation .
+]
+
+{ #category : #'*Erlang-Core' }
+ErlangPort >> erlangEncoder [
+	"comment stating purpose of message"
+
+	^ #ErlangPortEncoder 
 ]
 
 { #category : #comparing }

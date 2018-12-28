@@ -1,7 +1,7 @@
-Extension { #name : #OrderedCollection }
+Extension { #name : #ByteString }
 
 { #category : #'*Erlang-Core' }
-OrderedCollection >> erlangEncoder [
+ByteString >> erlangEncoder [
 	"comment stating purpose of message"
 
 	^ #ErlangListEncoder .

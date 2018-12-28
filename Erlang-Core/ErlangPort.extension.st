@@ -1,8 +1,8 @@
 Extension { #name : #ErlangPort }
 
 { #category : #'*Erlang-Core' }
-ErlangPort >> asErlangObject: aStream [
+ErlangPort >> erlangEncoder [
 	"comment stating purpose of message"
 
-	ErlangDencoder writePort: self to: aStream.
+	^ #ErlangPortEncoder 
 ]

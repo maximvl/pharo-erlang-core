@@ -1,8 +1,8 @@
 Extension { #name : #Array }
 
 { #category : #'*Erlang-Core' }
-Array >> asErlangObject: aStream [
+Array >> erlangEncoder [
 	"comment stating purpose of message"
 
-	ErlangDencoder writeTuple: self to: aStream.
+	^ #ErlangTupleEncoder .
 ]
