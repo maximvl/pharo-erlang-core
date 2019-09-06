@@ -26,7 +26,7 @@ ErlangFunEncoder class >> decode: aStream [
 			index := self decodeTerm: aStream.
 			uniq := self decodeTerm: aStream.
 			freeVars := (1 to: nFreeVars) collect: [ :n | self decodeTerm: aStream ].
-			^ ErlangFun pid: pid module: module index: index uniq: uniq freeVars: freeVars arity: arity md5: md5 ]
+			^ (ErlangFun new) pid: pid; module: module; index: index; uniq: uniq; freeVars: freeVars ]
 		ifFalse: [
 			aStream next: 4.
 			arity := aStream next.
@@ -38,7 +38,7 @@ ErlangFunEncoder class >> decode: aStream [
 			uniq := self decodeTerm: aStream.
 			pid := self decodeTerm: aStream.
 			freeVars := (1 to: nFreeVars) collect: [ :n | self decodeTerm: aStream ].
-			^ ErlangFun pid: pid module: module index: index oldIndex: oldIndex uniq: uniq freeVars: freeVars arity: arity md5: md5 ].
+			^ (ErlangFun new) pid: pid; module: module; index: index; oldIndex: oldIndex; uniq: uniq; freeVars: freeVars; arity: arity; md5: md5 ].
 	
 ]
 
@@ -49,7 +49,7 @@ ErlangFunEncoder class >> encode: aFun to: aStream [
 	| arity vars bytes size |
 	arity := aFun arity.
 	vars := aFun freeVars.
-	arity = -1 
+	arity isNil
 		ifTrue: [ 
 			aStream nextPut: FunTag .
 			aStream nextPutAll: ((vars size) asByteArrayOfSize: 4).
@@ -68,7 +68,7 @@ ErlangFunEncoder class >> encode: aFun to: aStream [
 				s nextPutAll: (aFun index asByteArrayOfSize: 4).
 				s nextPutAll: (vars size asByteArrayOfSize: 4).
 				self encodeTerm: (aFun module) to: s.
-				self encodeTerm: (aFun old_index) to: s.
+				self encodeTerm: (aFun oldIndex) to: s.
 				self encodeTerm: (aFun uniq) to: s.
 				self encodeTerm: (aFun pid) to: s.
 				vars do: [ :v | self encodeTerm: v to: s ] ].

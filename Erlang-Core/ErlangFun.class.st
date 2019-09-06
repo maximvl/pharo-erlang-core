@@ -17,33 +17,15 @@ Class {
 	#category : #'Erlang-Core'
 }
 
-{ #category : #'as yet unclassified' }
-ErlangFun class >> pid: aPid module: aModule index: anIndex oldIndex: oldIndex uniq: anUniq freeVars: aFreeVars arity: anArity md5: anMd5 [
+{ #category : #accessing }
+ErlangFun >> = another [
 	"comment stating purpose of message"
 
-	^ (self new)
-		pid: aPid;
-		module: aModule;
-		index: anIndex;
-		oldIndex: oldIndex;
-		uniq: anUniq;
-		freeVars: aFreeVars;
-		arity: anArity ;
-		md5: anMd5 .
-]
-
-{ #category : #'as yet unclassified' }
-ErlangFun class >> pid: aPid module: aModule index: anIndex uniq: anUniq freeVars: aFreeVars arity: anArity md5: aMd5 [
-	"comment stating purpose of message"
-
-	^ (self new)
-		pid: aPid;
-		module: aModule;
-		index: anIndex;
-		uniq: anUniq;
-		freeVars: aFreeVars;
-		arity: anArity;
-		md5: aMd5.
+	^ self class = (another class) and: 
+		[self arity = (another arity) and: 
+		[self module = (another module) and:
+		[self md5 = (another md5) and:
+		[self uniq = (another uniq)]]]].
 ]
 
 { #category : #accessing }
@@ -86,6 +68,15 @@ ErlangFun >> freeVars: aValue [
 	"comment stating purpose of message"
 
 	freeVars := aValue
+]
+
+{ #category : #accessing }
+ErlangFun >> hash [
+	"comment stating purpose of message"
+	(arity hash) bitXor: 
+	((module hash) bitXor:
+	((md5 hash) bitXor: 
+	((uniq hash)))).
 ]
 
 { #category : #accessing }
